@@ -31,6 +31,8 @@ class RSA_Factors:
                     buffer = file.readline()
         except ValueError as error:
             print(error)
+        except FileNotFoundError as error:
+            print(error)
 
     def factors(self, n):
         '''
