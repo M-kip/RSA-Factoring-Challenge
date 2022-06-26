@@ -1,4 +1,8 @@
 #!/usr/bin/python3
+"""
+   This module imports and factorize numbers
+   from a files and prints output to stdout
+"""
 from sys import argv
 
 
@@ -18,35 +22,31 @@ class RSA_Factors:
         '''
         read from file
         '''
-        with open(self.filename, encoding="utf-8") as file:
-            buffer = file.readlines()
-        buffer_int = []
         try:
-            for line in buffer:
-                buffer_int.append(int(line))
+            with open(self.filename, encoding="utf-8") as file:
+                buffer = file.readline()
+                while buffer != "":
+                    num = int(buffer.split('\n')[0])
+                    self.factors(num)
+                    buffer = file.readline()
         except ValueError as error:
             print(error)
-        return buffer_int
 
     def factors(self, n):
         '''
         return the factors of a number
         '''
-        for i in range(2, n):
-            if n == ((n // i) * i):
-                print("{}={}*{}".format(n, (n // i), i))
-                break
+        i = 2
 
-    def iterate(self):
-        '''
-        iterate through the file
-        '''
-        int_list = self.read_file()
-        for n in int_list:
-            self.factors(n)
+        if n < 2:
+            print("Number less than 2")
+            return
+        while n % i:
+            i += 1
+        print("{:.0f}={:.0f}*{:d}".format(n, n / i, i))
 
 
 if __name__ == "__main__":
-    if len(argv) < 2:
+    if len(argv) != 2:
         print("Usage: please provide file path")
-    RSA_Factors(argv[1]).iterate()
+    RSA_Factors(argv[1]).read_file()
