@@ -22,8 +22,11 @@ class RSA_Factors:
         with open(self.filename, encoding="utf-8") as file:
             buffer = file.readlines()
         buffer_int = []
-        for line in buffer:
-            buffer_int.append(int(line))
+        try:
+            for line in buffer:
+                buffer_int.append(int(line))
+        except ValueError as error:
+            print(error)
         return buffer_int
 
     def factors(self, n):
