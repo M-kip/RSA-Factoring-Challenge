@@ -1,7 +1,5 @@
 #!/usr/bin/python3
 from sys import argv
-from math import sqrt
-from sys import argc
 
 
 class RSA_Factors:
@@ -49,6 +47,6 @@ class RSA_Factors:
 
 
 if __name__ == "__main__":
-    if argc < 2:
+    if len(argv) < 2:
         print("Usage: please provide file path")
     RSA_Factors(argv[1]).iterate()
